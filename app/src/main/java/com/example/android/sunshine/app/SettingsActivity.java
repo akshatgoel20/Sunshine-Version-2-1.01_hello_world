@@ -1,9 +1,11 @@
 package com.example.android.sunshine.app;
 
+import android.content.Intent;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
@@ -59,4 +61,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         return true;
     }
 
+    @Nullable
+    @Override
+    public Intent getParentActivityIntent() {
+        return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
 }

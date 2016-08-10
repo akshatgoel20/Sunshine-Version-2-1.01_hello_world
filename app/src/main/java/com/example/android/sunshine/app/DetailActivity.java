@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.android.sunshine.app.data.DetailFragment;
+
 public class DetailActivity extends ActionBarActivity {
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -15,9 +17,19 @@ public class DetailActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
         if (savedInstanceState == null) {
+            // Create the detail fragment and add it to the activity
+            // using a fragment transaction.
+
+            Bundle arguments = new Bundle();
+            arguments.putParcelable(DetailFragment.DETAIL_URI, getIntent().getData());
+
+            DetailFragment fragment = new DetailFragment();
+            fragment.setArguments(arguments);
+
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new DialogFragment())
+                    .add(R.id.weather_detail_container, fragment)
                     .commit();
         }
 
